@@ -1,0 +1,22 @@
+# WARNING: this file is not suitable for production, please use with caution
+version: '3'
+
+services:
+  web:
+    image: technical-challenge-ui
+    build: .
+    env_file:
+      - ./.flaskenv
+    environment:
+      - DATABASE_URI=sqlite:////db/challenge.db
+    volumes:
+      - ./assets:/code/assets
+      - ./challenge:/code/challenge
+      - ./db/:/db/
+      - node-modules:/code/node_modules/
+    ports:
+      - "2992:2992"
+      - "5000:5000"
+
+volumes:
+  node-modules:
